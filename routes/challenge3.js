@@ -62,7 +62,7 @@ var routes = function(app) {
       var response = db.completeChallenge3(req.param('id'));
       if (response.error) return res.json(response);
 
-      return res.json({ ok: true });
+      return res.json({ msg: 'nice job, onto challenge 4!', nextUrl: '/challenge4' });
     });
   });
 };

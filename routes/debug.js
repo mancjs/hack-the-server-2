@@ -1,11 +1,6 @@
 var db = require('../lib/db');
 var events = require('../lib/events');
 
-var team = {
-  name: 'Manc JS Bot',
-  gravatar: db.getGravatarUrl('mancjs@martinrue.com')
-}
-
 var routes = function(app) {
   app.get('/debug/114797', function(req, res) {
     return res.json(db.getTeams());

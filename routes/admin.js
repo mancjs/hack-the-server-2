@@ -1,6 +1,6 @@
 var db = require('../lib/db');
 var events = require('../lib/events');
-var basicAuth = require('./basic-auth');
+var basicAuth = require('./middleware/basic-auth');
 
 var routes = function(app) {
   app.get('/admin', basicAuth, function(req, res) {

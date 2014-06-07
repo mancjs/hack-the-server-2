@@ -25,7 +25,7 @@ app.all('*', function(req, res, next) {
   return throttled ? res.json({ error: 'enhance your calm John Spartan', bannedFor: '1 minute' }) : next();
 });
 
-require('./routes/debug')(app);
+require('./routes/admin')(app);
 require('./routes/events')(app);
 require('./routes/dashboard')(app);
 require('./routes/challenge1')(app);

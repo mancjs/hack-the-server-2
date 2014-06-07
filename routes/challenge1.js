@@ -1,5 +1,6 @@
 var db = require('../lib/db');
 var events = require('../lib/events');
+var email = require('../lib/email');
 
 var routes = function(app) {
   app.get('/1995', function(req, res) {
@@ -10,9 +11,14 @@ var routes = function(app) {
     var response = db.registerTeam(req.body && req.body.name, req.body && req.body.email);
     if (response.error) return res.json(response);
 
-    killTeamIn(response.id, 60);
-    events.add(response, 'A Challenger Appears!');
-    return res.json({ msg: 'team id ' + response.id + ' created – validate (POST /validate) within 60s or die' });
+    email.send(req.body.email, response.id, function(err, resp) {
+      if (err) return console.log(err);
+
+      killTeamIn(response.id, 240);
+      events.add(response, 'A Challenger Appears!');
+    });
+
+    return res.json({ msg: 'team ' + response.name + ' created – validate (POST /validate) within 240s or die, check your email' });
   });
 
   app.post('/validate', function(req, res) {

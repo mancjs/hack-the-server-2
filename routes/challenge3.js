@@ -1,34 +1,26 @@
-var crypto = require('crypto');
 var db = require('../lib/db');
 var events = require('../lib/events');
 
-var sha = function(kind, data) {
-  return crypto.createHash(kind).update(data).digest('hex');
-};
-
 var routes = function(app) {
-  app.get('/challenge_number_three', function(req, res) {
-    return res.json({ error: 'just thought you\'d give it a shot, huh?' });
+  app.all('/' + new Buffer('/challenge2').toString('base64'), function(req, res) {
+    return res.json({ error: 'this is the encoded version of the URL, you want the decoded version' });
   });
 
-  app.get('/' + sha('sha1', 'challenge_number_three'), function(req, res) {
-    return res.json({ error: 'good try, but it\'s not SHA1' });
-  });
+  app.all('/challenge2', function(req, res) {
+    if (req.method !== 'PUT') {
+      return res.json({ error: 'who said I respond to ' + req.method + '?' });
+    }
 
-  app.get('/' + sha('sha256', 'challenge_number_three'), function(req, res) {
-    return res.json({ error: 'Nope, it\'s not SHA256' });
-  });
-
-  app.get('/' + sha('sha512', 'challenge_number_three'), function(req, res) {
-    var response = db.completeChallenge3(req.param('id'));
+    var response = db.completeChallenge2(req.body && req.body.id);
     if (response.error) return res.json(response);
 
-    events.add(response, 'Figured out which SHA algorithm to use and made it to challenge 4');
+    events.add(response, 'Made it to challenge 3');
 
     return res.json({
-      msg: 'not bad, not bad',
-      nextUrl: '/challenge4',
-      hint: 'POST a file that is exactly X KiB in size, where X is the answer to the ultimate question of life, the universe, and everything'
+      msg: 'not bad, let\'s up the level a bit...',
+      nextUrl: 'challenge_number_three',
+      hint: 'you will want to hash that URL with one of the SHA algorithms (better start guessing), and encode as hex',
+      verb: 'GET'
     });
   });
 };

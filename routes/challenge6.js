@@ -2,23 +2,28 @@ var db = require('../lib/db');
 var events = require('../lib/events');
 
 var routes = function(app) {
-  app.get('/5mo734umnbt', function(req, res) {
-    return res.json({ error: 'wrong needle, did you really think it would be that simple?' });
+  app.get('/0/100', function(req, res) {
+    return res.json({ error: 'there are more things screwed than just that' });
   });
 
-  app.get('/needle83wv', function(req, res) {
-    var response = db.completeChallenge6(req.param('id'));
+  app.get('/43008/100', function(req, res) {
+    return res.json({ error: 'fixed left, but not right' });
+  });
+
+  app.get('/0/45', function(req, res) {
+    return res.json({ error: 'fixed right, but not left' });
+  });
+
+  app.get('/43008/45', function(req, res) {
+    var response = db.completeChallenge5(req.param('id'));
     if (response.error) return res.json(response);
-    if (response.key) return res.json({ error: response.teamWithKey + ' has your key' });
 
-    events.add(response, 'Found the needle and made it to the final challenge');
-
-    var teamWithKey = db.generateKey(response);
+    events.add(response, 'Fixed the code and made it to challenge 6');
 
     return res.json({
-      msg: 'you are now on the final challenge',
-      hint: teamWithKey + ' now holds your key to finishing',
-      nextUrl: '/finish/<your key here>'
+      msg: 'nice job',
+      nextUrl: '/files/haystack.zip',
+      hint: 'find the needle in the haystack'
     });
   });
 };

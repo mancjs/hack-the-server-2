@@ -1,22 +1,35 @@
-var fs = require('fs');
+var crypto = require('crypto');
 var db = require('../lib/db');
 var events = require('../lib/events');
 
+var sha = function(kind, data) {
+  return crypto.createHash(kind).update(data).digest('hex');
+};
+
 var routes = function(app) {
-  app.post('/challenge4', function(req, res) {
+  app.get('/challenge_number_three', function(req, res) {
+    return res.json({ error: 'just thought you\'d give it a shot, huh?' });
+  });
 
-    var size = fs.statSync(req.files.file.path).size;
+  app.get('/' + sha('sha1', 'challenge_number_three'), function(req, res) {
+    return res.json({ error: 'good try, but it\'s not SHA1' });
+  });
 
-    if (!req.files.file) return res.json({ error: 'no file was POSTed for key `file`' });
-    if (size === 42 * 1000) return res.json({ error: 'KiB?' });
-    if (size !== 42 * 1024) return res.json({ error: 'file is the wrong size' });
+  app.get('/' + sha('sha256', 'challenge_number_three'), function(req, res) {
+    return res.json({ error: 'Nope, it\'s not SHA256' });
+  });
 
-    var response = db.completeChallenge4(req.body && req.body.id);
+  app.get('/' + sha('sha512', 'challenge_number_three'), function(req, res) {
+    var response = db.completeChallenge3(req.param('id'));
     if (response.error) return res.json(response);
 
-    events.add(response, 'Has POSTed their way to challenge 5');
+    events.add(response, 'Figured out which SHA algorithm to use and made it to challenge 4');
 
-    return res.json({ nextUrl: '/js/fixme.js' });
+    return res.json({
+      msg: 'not bad, not bad',
+      nextUrl: '/challenge4',
+      hint: 'POST a file that is exactly X KiB in size, where X is the answer to the ultimate question of life, the universe, and everything'
+    });
   });
 };
 

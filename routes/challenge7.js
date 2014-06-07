@@ -1,24 +1,25 @@
 var db = require('../lib/db');
 var events = require('../lib/events');
-var apithrottle = require('../lib/apithrottle');
 
 var routes = function(app) {
-  app.get('/finish/:key', function(req, res) {
-    var throttled = apithrottle.isThrottled(req.connection.remoteAddress);
-    if (throttled) return res.json({ error: 'exceeded limit of 1000 request per minute' });
+  app.get('/5mo734umnbt', function(req, res) {
+    return res.json({ error: 'wrong needle, did you really think it would be that simple?' });
+  });
 
-    var response = db.completeChallenge7(req.param('id'), req.param('key'));
+  app.get('/needle83wv', function(req, res) {
+    var response = db.completeChallenge6(req.param('id'));
     if (response.error) return res.json(response);
+    if (response.key) return res.json({ error: response.teamWithKey + ' has your key' });
 
-    events.add(response, response.place ? ('Finished in ' + response.place + ' place') : 'Finished all challenges');
+    events.add(response, 'Found the needle and made it to the final challenge');
 
-    var json = {
-      msg: 'awesome – you completed all challenges'
-    };
+    var teamWithKey = db.generateKey(response);
 
-    if (response.place) json.place = response.place;
-
-    return res.json(json);
+    return res.json({
+      msg: 'you are now on the final challenge',
+      hint: teamWithKey + ' now holds your key to finishing',
+      nextUrl: '/finish/<your key here>'
+    });
   });
 };
 

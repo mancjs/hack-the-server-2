@@ -1,30 +1,22 @@
+var fs = require('fs');
 var db = require('../lib/db');
 var events = require('../lib/events');
 
 var routes = function(app) {
-  app.get('/0/100', function(req, res) {
-    return res.json({ error: 'there are more things screwed than just that' });
-  });
+  app.post('/challenge4', function(req, res) {
 
-  app.get('/43008/100', function(req, res) {
-    return res.json({ error: 'fixed left, but not right' });
-  });
+    var size = fs.statSync(req.files.file.path).size;
 
-  app.get('/0/45', function(req, res) {
-    return res.json({ error: 'fixed right, but not left' });
-  });
+    if (!req.files.file) return res.json({ error: 'no file was POSTed for key `file`' });
+    if (size === 42 * 1000) return res.json({ error: 'KiB?' });
+    if (size !== 42 * 1024) return res.json({ error: 'file is the wrong size' });
 
-  app.get('/43008/45', function(req, res) {
-    var response = db.completeChallenge5(req.param('id'));
+    var response = db.completeChallenge4(req.body && req.body.id);
     if (response.error) return res.json(response);
 
-    events.add(response, 'Fixed the code and made it to challenge 6');
+    events.add(response, 'Has POSTed their way to challenge 5');
 
-    return res.json({
-      msg: 'nice job',
-      nextUrl: '/files/haystack.zip',
-      hint: 'find the needle in the haystack'
-    });
+    return res.json({ nextUrl: '/js/fixme.js' });
   });
 };
 

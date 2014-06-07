@@ -22,15 +22,6 @@ var routes = function(app) {
 
     return res.json({ msg: 'team ' + response.name + ' created, check your email. You must validate your team within 10 minutes' });
   });
-
-  app.post('/val1date/:teamId', function(req, res) {
-    var response = db.validateTeam(req.param('teamId'));
-    if (response.error) return res.json(response);
-
-    var nextUrl = new Buffer('/challenge2').toString('base64');
-    events.add(response, 'Figured out how to register and made it to challenge 2!');
-    return res.json({ msg: 'congratulations – just in time', nextUrl: nextUrl });
-  });
 };
 
 var killTeamIn = function(id, seconds) {

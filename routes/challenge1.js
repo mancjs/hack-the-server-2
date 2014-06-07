@@ -2,11 +2,11 @@ var db = require('../lib/db');
 var events = require('../lib/events');
 
 var routes = function(app) {
-  app.get('/register', function(req, res) {
+  app.get('/1995', function(req, res) {
     return res.json({ error: 'do you normally make GET requests to create an account? ;)' });
   });
 
-  app.post('/register', function(req, res) {
+  app.post('/1995', function(req, res) {
     var response = db.registerTeam(req.body && req.body.name, req.body && req.body.email);
     if (response.error) return res.json(response);
 

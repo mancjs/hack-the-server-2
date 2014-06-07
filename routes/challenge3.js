@@ -40,6 +40,14 @@ var routes = function(app) {
   });
 
   app.post('/challenge3', function(req, res) {
+    if (!req.param('id')) {
+      return res.json({ error: 'you must think I\'m psychic – without an id I have no idea who you are' });
+    }
+
+    if (!req.param('script')) {
+      return res.json({ error: 'if you\'re trying to send me a script, how about a value for the \'script\' parameter?' });
+    }
+
     var data = generateBinaryString();
 
     var test = {

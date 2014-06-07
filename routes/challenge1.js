@@ -16,15 +16,15 @@ var routes = function(app) {
     email.send(req.body.email, response.id, function(err, resp) {
       if (err) return console.log(err);
 
-      killTeamIn(response.id, 240);
+      killTeamIn(response.id, 10 * 60);
       events.add(response, 'A Challenger Appears!');
     });
 
-    return res.json({ msg: 'team ' + response.name + ' created, check your email. please validate your team within 240 seconds' });
+    return res.json({ msg: 'team ' + response.name + ' created, check your email. You must validate your team within 10 minutes' });
   });
 
-  app.post('/validate', function(req, res) {
-    var response = db.validateTeam(req.body && req.body.id);
+  app.post('/val1date/:teamId', function(req, res) {
+    var response = db.validateTeam(req.param('teamId'));
     if (response.error) return res.json(response);
 
     var nextUrl = new Buffer('/challenge2').toString('base64');

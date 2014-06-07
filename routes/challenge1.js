@@ -8,6 +8,8 @@ var routes = function(app) {
   });
 
   app.post('/1995', function(req, res) {
+    if (!db.isRegistrationEnabled()) return res.json({ error: 'sorry registration is closed :)' })
+
     var response = db.registerTeam(req.body && req.body.name, req.body && req.body.email);
     if (response.error) return res.json(response);
 
@@ -18,7 +20,7 @@ var routes = function(app) {
       events.add(response, 'A Challenger Appears!');
     });
 
-    return res.json({ msg: 'team ' + response.name + ' created – validate (POST /validate) within 240s or die, check your email' });
+    return res.json({ msg: 'team ' + response.name + ' created, check your email. please validate your team within 240 seconds' });
   });
 
   app.post('/validate', function(req, res) {

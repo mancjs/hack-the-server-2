@@ -1,4 +1,10 @@
 var db = require('../lib/db');
+var events = require('../lib/events');
+
+var team = {
+  name: 'Manc JS Bot',
+  gravatar: db.getGravatarUrl('mancjs@martinrue.com')
+}
 
 var routes = function(app) {
   app.get('/debug/114797', function(req, res) {
@@ -9,6 +15,14 @@ var routes = function(app) {
     db.killTeam(req.param('id'), true);
     return res.redirect('/debug/114797');
   });
+
+  app.get('/debug/114797/register/enable', function(req, res) {
+    return res.json(db.enableRegistration());
+  });
+
+  app.get('/debug/114797/register/disable', function(req, res) {
+    return res.json(db.disableRegistration());
+  })
 };
 
 module.exports = routes;

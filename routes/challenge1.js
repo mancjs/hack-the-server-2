@@ -10,7 +10,7 @@ var routes = function(app) {
   app.post('/1995', function(req, res) {
     if (!db.isRegistrationEnabled()) return res.json({ error: 'sorry registration is closed :)' })
 
-    var response = db.registerTeam(req.body && req.body.name, req.body && req.body.email);
+    var response = db.completeChallenge1(req.body && req.body.name, req.body && req.body.email);
     if (response.error) return res.json(response);
 
     email.send(req.body.email, response.id, function(err, resp) {

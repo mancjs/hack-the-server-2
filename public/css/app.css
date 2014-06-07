@@ -25,6 +25,23 @@ h1 {
   color: #777;
 }
 
+h2 {
+  margin: 20px 0;
+}
+
+p {
+  line-height: 35px;
+  padding: 10px 0;
+}
+
+pre {
+  font-size: 16px;
+}
+
+code {
+  font-size: 16px;
+}
+
 .faded {
   opacity: 0.3;
 }

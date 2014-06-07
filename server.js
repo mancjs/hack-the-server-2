@@ -17,7 +17,13 @@ app.configure(function() {
 });
 
 app.all('*', function(req, res, next) {
-  if (req.url === '/' || req.url === '/favicon.ico' || req.url === '/renderteams' || req.url.match(/^\/event/g) || req.url.match(/^\/debug/g) || req.url.match(/^\/finish/g)) {
+  if (req.url === '/' ||
+      req.url === '/favicon.ico' ||
+      req.url === '/renderteams' ||
+      req.url === '/challenge3' ||
+      req.url.match(/^\/event/g) ||
+      req.url.match(/^\/admin/g) ||
+      req.url.match(/^\/finish/g)) {
     return next();
   }
 

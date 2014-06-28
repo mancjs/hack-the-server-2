@@ -57,12 +57,22 @@ var routes = function(app) {
     };
 
     sandbox.run(test, function(err, valid) {
-      if (err) return res.json({ error: err });
+      if (err) {
+        return res.json({ error: err });
+      }
 
       var response = db.completeChallenge3(req.param('id'));
-      if (response.error) return res.json(response);
 
-      return res.json({ msg: 'nice job, onto challenge 4!', nextUrl: '/challenge4' });
+      if (response.error) {
+        return res.json(response);
+      }
+
+      events.add(response, 'Has JavaScript skills! Onwards to challenge 4!');
+
+      return res.json({
+        msg: 'nice job, onwards to challenge 4!',
+        nextUrl: 'hit /challenge4 in your browser'
+      });
     });
   });
 };

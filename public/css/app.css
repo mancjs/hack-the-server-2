@@ -19,10 +19,10 @@ body {
 }
 
 h1 {
-  font-size: 60px;
+  font-size: 50px;
   font-weight: 400;
   margin: 0 0 40px 0;
-  color: #777;
+  color: #555;
 }
 
 h2 {
@@ -119,6 +119,17 @@ code {
   position: relative;
 }
 
+.team .validation-time {
+  position: absolute;
+  top: 71px;
+  left: 0px;
+  right: 0px;
+  color: #ff0000;
+  font-size: 60px;
+  font-weight: bold;
+  text-align: center;
+}
+
 .complete {
   font-size: 150px;
   position: absolute;
@@ -173,4 +184,26 @@ code {
   font-size: 60px;
   font-weight: 400;
   color: #aaa;
+}
+
+.hint {
+  font-size: 22px;
+  color: #888;
+  margin-top: -25px;
+}
+
+#no-local {
+  position: absolute;
+  opacity: 0.95;
+  top: 5%;
+  left: 5%;
+  right: 5%;
+  color: #cc3333;
+  background: #ffaaaa;
+  border: solid 1px #dd6666;
+  padding: 30px 20px;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 34px;
+  display: none;
 }

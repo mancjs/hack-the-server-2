@@ -21,6 +21,11 @@ app.all('*', function(req, res, next) {
       req.url === '/favicon.ico' ||
       req.url === '/renderteams' ||
       req.url === '/challenge3' ||
+      req.url === '/challenge4' ||
+      req.url === '/challenge4-script' ||
+      req.url === '/challenge5' ||
+      req.url.match(/^\/challenge6/g) ||
+      req.url.match(/^\/challenge7/g) ||
       req.url.match(/^\/event/g) ||
       req.url.match(/^\/admin/g) ||
       req.url.match(/^\/finish/g)) {

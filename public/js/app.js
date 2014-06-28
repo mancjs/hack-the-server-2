@@ -24,7 +24,7 @@ localStorage['eventIndex'] = localStorage['eventIndex'] || 0;
 $(function() {
   $('.modal').on('shown', function () {
     eventBeingShown = true;
-    setTimeout(function() { $('.modal').modal('hide'); }, 10000);
+    setTimeout(function() { $('.modal').modal('hide'); }, 5000);
   });
 
   $('.modal').on('hidden', function () {
@@ -33,7 +33,7 @@ $(function() {
     setTimeout(showNextEvent, 3000);
   });
 
-  setInterval(loadTeams, 1000);
+  setInterval(loadTeams, 3000);
   setTimeout(showNextEvent, 3000);
 });
 

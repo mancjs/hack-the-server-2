@@ -4,7 +4,7 @@
   "description": "MancJS Hack The Server challenge",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine-node spec --verbose"
   },
   "repository": "git@github.com:martinrue/hack-me-if-you-can.git",
   "author": "Martin Rue",
@@ -14,6 +14,10 @@
     "underscore": "~1.4.4",
     "mustachex": "0.0.2",
     "moment": "~2.0.0",
-    "nodemailer": "~0.6.5"
+    "nodemailer": "~0.6.5",
+    "usage": "~0.4.3"
+  },
+  "devDependencies": {
+    "jasmine-node": "~1.14.3"
   }
 }

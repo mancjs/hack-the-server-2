@@ -1,3 +1,4 @@
+var moment = require('moment');
 var db = require('../lib/db');
 var _ = require('underscore');
 
@@ -13,6 +14,11 @@ var getTeamData = function() {
   _.each(data.teams, function(team) {
     setMustacheStageKey(team);
     team.name = team.name.substring(0, 20);
+
+    if (!team.valid) {
+      var timeLeft = 10 - moment().diff(team.created, 'minutes');
+      team.validationTimeLeft = 'T-' + timeLeft + ' min' + (timeLeft !== 1 ? 's' : '');
+    }
   });
 
   var teams = _.sortBy(data.teams, function(team) {

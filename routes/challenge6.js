@@ -2,29 +2,36 @@ var db = require('../lib/db');
 var events = require('../lib/events');
 
 var routes = function(app) {
-  app.get('/0/100', function(req, res) {
-    return res.json({ error: 'there are more things screwed than just that' });
-  });
+  app.get('/challenge6', function(req, res) {
+    var id = req.param('id');
+    var team = db.getTeam(id);
 
-  app.get('/43008/100', function(req, res) {
-    return res.json({ error: 'fixed left, but not right' });
-  });
-
-  app.get('/0/45', function(req, res) {
-    return res.json({ error: 'fixed right, but not left' });
-  });
-
-  app.get('/43008/45', function(req, res) {
-    var response = db.completeChallenge5(req.param('id'));
-    if (response.error) return res.json(response);
-
-    events.add(response, 'Fixed the code and made it to challenge 6');
-
-    return res.json({
-      msg: 'nice job',
-      nextUrl: '/files/haystack.zip',
-      hint: 'find the needle in the haystack'
+    return res.render('challenge6-readme', {
+      id: id,
+      teamExists: !!team,
+      pairingKey: team ? team.pairingKey : ''
     });
+  });
+
+  app.post('/challenge6', function(req, res) {
+    var id = req.param('id');
+    var pairingKey = req.param('pairing-key');
+
+    var response = db.completeChallenge6(id, pairingKey);
+
+    if (response.error) {
+      return res.json({ error: response.error });
+    }
+
+    if (response.matchFound) {
+      return res.json({
+        msg: 'just in time – both teams have progressed to challenge 7'
+      });
+    } else {
+      return res.json({
+        msg: 'key accepted, better hope the other team move their ass'
+      });
+    }
   });
 };
 

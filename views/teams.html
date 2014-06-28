@@ -1,6 +1,9 @@
 <div class="team-container">
   {{#teamsLeft}}
   <div class="{{^valid}}faded{{/valid}} team">
+    {{^valid}}
+      <div class="validation-time">{{validationTimeLeft}}</div>
+    {{/valid}}
 
     {{#trophy}}
     <span class="icon-trophy complete complete-{{trophy}}">
@@ -53,6 +56,9 @@
 <div class="team-container">
   {{#teamsRight}}
   <div class="{{^valid}}faded{{/valid}} team">
+    {{^valid}}
+      <div class="validation-time">{{validationTimeLeft}}</div>
+    {{/valid}}
 
     {{#trophy}}
     <span class="icon-trophy complete complete-{{trophy}}">

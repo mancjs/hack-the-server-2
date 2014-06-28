@@ -95,7 +95,7 @@ describe('sandbox', function() {
     };
 
     sandbox.run(test, function(err, valid) {
-      expect(err).toEqual('memory usage too high');
+      expect(err).toEqual('your script is broken');
       expect(valid).toBeFalsy();
       done();
     });

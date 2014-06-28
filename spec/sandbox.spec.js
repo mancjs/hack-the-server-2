@@ -23,7 +23,7 @@ describe('sandbox', function() {
     };
 
     sandbox.run(test, function(err, valid) {
-      expect(err).toEqual('input: 123, expected: 123, got: abc');
+      expect(err).toMatch('input: 123, expected: 123, got: abc');
       expect(valid).toBeFalsy();
       done();
     });
@@ -35,7 +35,7 @@ describe('sandbox', function() {
     };
 
     sandbox.run(test, function(err, valid) {
-      expect(err).toEqual('no global main function defined');
+      expect(err).toMatch('no global main function defined');
       expect(valid).toBeFalsy();
       done();
     });
@@ -47,7 +47,7 @@ describe('sandbox', function() {
     };
 
     sandbox.run(test, function(err, valid) {
-      expect(err).toEqual('your script is broken');
+      expect(err).toMatch('your script is broken – SyntaxError: Unexpected token .');
       expect(valid).toBeFalsy();
       done();
     });
@@ -59,7 +59,7 @@ describe('sandbox', function() {
     };
 
     sandbox.run(test, function(err, valid) {
-      expect(err).toEqual('no global main function defined');
+      expect(err).toMatch('no global main function defined');
       expect(valid).toBeFalsy();
       done();
     });
@@ -71,7 +71,7 @@ describe('sandbox', function() {
     };
 
     sandbox.run(test, function(err, valid) {
-      expect(err).toEqual('script took too long (5s)');
+      expect(err).toMatch('script took too long');
       expect(valid).toBeFalsy();
       done();
     });
@@ -83,7 +83,7 @@ describe('sandbox', function() {
     };
 
     sandbox.run(test, function(err, valid) {
-      expect(err).toEqual('memory usage too high');
+      expect(err).toMatch('memory usage too high');
       expect(valid).toBeFalsy();
       done();
     });
@@ -95,7 +95,7 @@ describe('sandbox', function() {
     };
 
     sandbox.run(test, function(err, valid) {
-      expect(err).toEqual('your script is broken');
+      expect(err).toMatch('your script is broken');
       expect(valid).toBeFalsy();
       done();
     });

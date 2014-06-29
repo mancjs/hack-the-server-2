@@ -122,4 +122,17 @@ describe('sandbox', function() {
       });
     });
   });
+
+  it('disables the use of Array.prototype.sort in scripts', function(done) {
+    var test = {
+      script: 'var main = function() { return [].sort(function(){}); };',
+      input: '...',
+      output: 42
+    };
+
+    sandbox.run(test, teamId++, function(err, valid) {
+      expect(valid).toBeTruthy();
+      done();
+    });
+  });
 });

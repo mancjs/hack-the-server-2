@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Challenge 7 – Instructions</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css"></link>
+  <link rel="stylesheet" href="/css/app.css"></link>
+</head>
+<body>
+  <div class="container">
+    <h2>Challenge 7 – Instructions</h2>
+
+    {{^teamExists}}
+      <p>
+        Your team <code>id</code> is invalid.
+      </p>
+    {{/teamExists}}
+
+    {{#wrongStage}}
+      <p>
+        Your must complete challenge 6 first.
+      </p>
+    {{/wrongStage}}
+
+    {{#showInstructions}}
+      <p>
+        To complete challenge 7, you must write a JavaScript function that sorts a collection of numbers.
+      </p>
+
+      <p>
+        Your <code>main</code> function will be called with a single string argument that contains a
+        comma-separated list of vigesimal numbers. Return a string containing the same list of comma-separated
+        numbers, ordered from highest to lowest.
+      </p>
+
+      <p>
+        Oh yeah, this is code golf. In order to progress to the final challenge, submit a solution
+        that is either equal or fewer characters than the team who came before you. Every character counts.
+      </p>
+
+      <p>Post your script to <code>/challenge7</code></p>
+
+      <h2>Example</h2>
+
+      <pre>var main = function(numbers) {
+  // numbers is a string containing a comma-separated list of vigesimal numbers
+  // sort the numbers and return the correctly ordered version of the string
+  return '';
+};</pre>
+    {{/showInstructions}}
+  </div>
+</body>
+</html>

@@ -8,40 +8,45 @@
 <body>
   <div class="container">
     <h2>Challenge 6 – Instructions</h2>
+
     {{^teamExists}}
-    <p>
-      Your team <code>id</code> is invalid.
-    </p>
+      <p>
+        Your team <code>id</code> is invalid.
+      </p>
     {{/teamExists}}
 
     {{#teamExists}}
-    <p>
-      To complete challenge 6, you need to work with another team.
-      You must find another team at the same level and exchange pairing keys with each other.
-    </p>
-    <p>
-      Your pairing key is: <b>{{pairingKey}}</b>
-    </p>
-    <p>
-      Both teams must submit each other's pairing key within 3 seconds of each other.
-      Any longer and you'll both be banned from trying again for 5 minutes.
-    </p>
-    <p>
-      To submit the pairing key of another team, POST to <code>/challenge6</code> with the following parameters:
-      <table border="0" cellpadding="12">
-        <tr>
-          <td><code>id</code></td>
-          <td>your team id</td>
-        </tr>
-        <tr>
-          <td><code>pairing-key</code></td>
-          <td>the pairing key of the other team</td>
-        </tr>
-      </table>
-    </p>
-    <p>
-      Once complete, proceed to <a href="/challenge7?id={{id}}">challenge 7</a>.
-    </p>
+      <p>
+        To complete challenge 6, you need to work with another team.
+        You must find another team at the same level and exchange pairing keys with each other.
+      </p>
+
+      <p>
+        Your pairing key is: <b>{{pairingKey}}</b>
+      </p>
+
+      <p>
+        Both teams must submit each other's pairing key within 3 seconds of each other.
+        Any longer and you'll both be banned from trying again for 5 minutes.
+      </p>
+
+      <p>
+        To submit the pairing key of another team, POST to <code>/challenge6</code> with the following parameters:
+        <table border="0" cellpadding="12">
+          <tr>
+            <td><code>id</code></td>
+            <td>your team id</td>
+          </tr>
+          <tr>
+            <td><code>pairing-key</code></td>
+            <td>the pairing key of the other team</td>
+          </tr>
+        </table>
+      </p>
+
+      <p>
+        Once complete, proceed to <a href="/challenge7?id={{id}}">challenge 7</a>.
+      </p>
     {{/teamExists}}
   </div>
 </body>

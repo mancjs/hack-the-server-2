@@ -1,5 +1,4 @@
 var db = require('../lib/db');
-var events = require('../lib/events');
 
 var routes = function(app) {
   app.get('/challenge6', function(req, res) {

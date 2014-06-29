@@ -3,14 +3,17 @@ var events = require('../lib/events');
 
 var routes = function(app) {
   app.get('/challenge7', function(req, res) {
-    var id = req.param('id');
-    var team = db.getTeam(id);
+    var team = db.getTeam(req.param('id'));
 
-    if (!team || team.stage < 6) {
-      return res.json({ error: 'you need to complete challenge 6 first' });
-    }
+    return res.render('challenge7-readme', {
+      teamExists: !!team,
+      wrongStage: team && team.stage < 6,
+      showInstructions: team && team.stage >= 6
+    });
+  });
 
-    return res.send('ok');
+  app.post('/challenge7', function(req, res) {
+
   });
 };
 

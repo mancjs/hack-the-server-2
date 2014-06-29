@@ -1,6 +1,8 @@
 var sandbox = require('../lib/sandbox/sandbox');
 
 describe('sandbox', function() {
+  var teamId = 0;
+
   it('is valid if output matches expected', function(done) {
     var test = {
       script: 'function main(input) { return input; }',
@@ -8,7 +10,7 @@ describe('sandbox', function() {
       output: '123'
     };
 
-    sandbox.run(test, function(err, valid) {
+    sandbox.run(test, teamId++, function(err, valid) {
       expect(err).toBeFalsy();
       expect(valid).toBeTruthy();
       done();
@@ -22,7 +24,7 @@ describe('sandbox', function() {
       output: '123'
     };
 
-    sandbox.run(test, function(err, valid) {
+    sandbox.run(test, teamId++, function(err, valid) {
       expect(err).toMatch('input: 123, expected: 123, got: abc');
       expect(valid).toBeFalsy();
       done();
@@ -34,7 +36,7 @@ describe('sandbox', function() {
       script: ''
     };
 
-    sandbox.run(test, function(err, valid) {
+    sandbox.run(test, teamId++, function(err, valid) {
       expect(err).toMatch('no global main function defined');
       expect(valid).toBeFalsy();
       done();
@@ -46,7 +48,7 @@ describe('sandbox', function() {
       script: '...'
     };
 
-    sandbox.run(test, function(err, valid) {
+    sandbox.run(test, teamId++, function(err, valid) {
       expect(err).toMatch('your script is broken – SyntaxError: Unexpected token .');
       expect(valid).toBeFalsy();
       done();
@@ -58,7 +60,7 @@ describe('sandbox', function() {
       script: 'var app = function() { };'
     };
 
-    sandbox.run(test, function(err, valid) {
+    sandbox.run(test, teamId++, function(err, valid) {
       expect(err).toMatch('no global main function defined');
       expect(valid).toBeFalsy();
       done();
@@ -70,7 +72,7 @@ describe('sandbox', function() {
       script: 'var main = function() { while (true); };'
     };
 
-    sandbox.run(test, function(err, valid) {
+    sandbox.run(test, teamId++, function(err, valid) {
       expect(err).toMatch('script took too long');
       expect(valid).toBeFalsy();
       done();
@@ -82,7 +84,7 @@ describe('sandbox', function() {
       script: 'var main = function() { var arr = []; while (true) { arr.push("...."); } };'
     };
 
-    sandbox.run(test, function(err, valid) {
+    sandbox.run(test, teamId++, function(err, valid) {
       expect(err).toMatch('memory usage too high');
       expect(valid).toBeFalsy();
       done();
@@ -94,10 +96,30 @@ describe('sandbox', function() {
       script: 'var main = function() { return main(); };'
     };
 
-    sandbox.run(test, function(err, valid) {
+    sandbox.run(test, teamId++, function(err, valid) {
       expect(err).toMatch('your script is broken');
       expect(valid).toBeFalsy();
       done();
+    });
+  });
+
+  it('prevents scripts being run more than once per 5s', function(done) {
+    var test = {
+      script: 'var main = function(input) { return input; };',
+      input: '10',
+      output: '10'
+    };
+
+    var team = 'some-team-id';
+
+    sandbox.run(test, team, function(err, valid) {
+      expect(valid).toBeTruthy();
+
+      sandbox.run(test, team, function(err, valid) {
+        expect(err).toMatch('there must be 5s between each script run');
+        expect(valid).toBeFalsy();
+        done();
+      });
     });
   });
 });

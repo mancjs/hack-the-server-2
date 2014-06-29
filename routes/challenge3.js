@@ -56,7 +56,7 @@ var routes = function(app) {
       output: data.string
     };
 
-    sandbox.run(test, function(err, valid) {
+    sandbox.run(test, req.param('id'), function(err, valid) {
       if (err) {
         return res.json({ error: err });
       }

@@ -1,7 +1,7 @@
 var http = require('http');
 var express = require('express');
 var mustachex = require('mustachex');
-var throttle = require('./lib/throttle');
+//var throttle = require('./lib/throttle');
 var db = require('./lib/db');
 
 var app = express();
@@ -16,25 +16,25 @@ app.configure(function() {
   app.use(app.router);
 });
 
-app.all('*', function(req, res, next) {
-  if (req.url === '/' ||
-      req.url === '/favicon.ico' ||
-      req.url === '/renderteams' ||
-      req.url === '/challenge3' ||
-      req.url === '/challenge4' ||
-      req.url === '/challenge4-script' ||
-      req.url === '/challenge5' ||
-      req.url.match(/^\/challenge6/g) ||
-      req.url.match(/^\/challenge7/g) ||
-      req.url.match(/^\/event/g) ||
-      req.url.match(/^\/admin/g) ||
-      req.url.match(/^\/finish/g)) {
-    return next();
-  }
+// app.all('*', function(req, res, next) {
+//   if (req.url === '/' ||
+//       req.url === '/favicon.ico' ||
+//       req.url === '/renderteams' ||
+//       req.url === '/challenge3' ||
+//       req.url === '/challenge4' ||
+//       req.url === '/challenge4-script' ||
+//       req.url === '/challenge5' ||
+//       req.url.match(/^\/challenge6/g) ||
+//       req.url.match(/^\/challenge7/g) ||
+//       req.url.match(/^\/event/g) ||
+//       req.url.match(/^\/admin/g) ||
+//       req.url.match(/^\/finish/g)) {
+//     return next();
+//   }
 
-  var throttled = throttle.isThrottled(req.connection.remoteAddress);
-  return throttled ? res.json({ error: 'enhance your calm John Spartan', bannedFor: '1 minute' }) : next();
-});
+//   var throttled = throttle.isThrottled(req.connection.remoteAddress);
+//   return throttled ? res.json({ error: 'enhance your calm John Spartan', bannedFor: '1 minute' }) : next();
+// });
 
 require('./routes/admin')(app);
 require('./routes/events')(app);

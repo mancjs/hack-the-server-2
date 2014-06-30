@@ -167,4 +167,49 @@ describe('sandbox', function() {
       done();
     });
   });
+
+  it('does not have a higherOrLower function if the test contains no key', function(done) {
+    var test = {
+      script: 'var main = function() { higherOrLower(); };',
+      input: '...',
+      output: '...'
+    };
+
+    sandbox.run(test, teamId++, function(err, valid, logs) {
+      expect(valid).toBeFalsy();
+      expect(err).toMatch('ReferenceError: higherOrLower is not defined');
+      done();
+    });
+  });
+
+  it('has a higherOrLower function if the test contains a key', function(done) {
+    var test = {
+      script: 'var main = function() { higherOrLower(); return 42; };',
+      input: '...',
+      output: 42,
+      key: 123
+    };
+
+    sandbox.run(test, teamId++, function(err, valid, logs) {
+      expect(valid).toBeTruthy();
+      done();
+    });
+  });
+
+  it('the higherOrLower function gives back the correct higher, lower or equal responses', function(done) {
+    var test = {
+      script: 'var main = function() { console.log(higherOrLower(1000)); console.log(higherOrLower(1)); console.log(higherOrLower(123)); return 42; };',
+      input: '...',
+      output: 42,
+      key: 123
+    };
+
+    sandbox.run(test, teamId++, function(err, valid, logs) {
+      expect(valid).toBeTruthy();
+      expect(logs[0]).toMatch('lower');
+      expect(logs[1]).toMatch('higher');
+      expect(logs[2]).toMatch('equal');
+      done();
+    });
+  });
 });

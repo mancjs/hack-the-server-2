@@ -22,14 +22,17 @@ var showNextEvent = function() {
 localStorage['eventIndex'] = localStorage['eventIndex'] || 0;
 
 $(function() {
+  var hideTimer;
+
   $('.modal').on('shown', function () {
     eventBeingShown = true;
-    setTimeout(function() { $('.modal').modal('hide'); }, 5000);
+    hideTimer = setTimeout(function() { $('.modal').modal('hide'); }, 5000);
   });
 
   $('.modal').on('hidden', function () {
     eventBeingShown = false;
     localStorage['eventIndex']++;
+    clearTimeout(hideTimer);
     setTimeout(showNextEvent, 3000);
   });
 

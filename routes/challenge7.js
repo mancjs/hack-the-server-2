@@ -36,15 +36,18 @@ var routes = function(app) {
         return res.json({ error: err });
       }
 
-      // check script length
-
-      var response = db.completeChallenge7(req.param('id'));
+      var response = db.completeChallenge7(req.param('id'), req.param('script').length);
 
       if (response.error) {
         return res.json(response);
       }
 
-      events.add(response, 'Has made it to the final challenge!');
+      events.add(response, 'Has made it to the final challenge');
+
+      return res.json({
+        msg: 'you have made it to the final challenge',
+        nextUrl: 'see /final-challenge?id=' + req.param('id') + ' for instructions'
+      });
     });
   });
 };
@@ -52,7 +55,7 @@ var routes = function(app) {
 var createTestParameters = function() {
   var generateNumbers = function(amount) {
     return _.map(_.range(0, amount), function(number) {
-      return Math.floor(Math.random() * 5000) + 1;
+      return Math.floor(Math.random() * 999) + 1;
     });
   };
 
@@ -72,7 +75,7 @@ var createTestParameters = function() {
     }).join(', ');
   };
 
-  var numbers = generateNumbers(10);
+  var numbers = _.uniq(generateNumbers(10));
 
   return {
     input: createTestInput(numbers),

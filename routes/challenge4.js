@@ -22,7 +22,7 @@ var routes = function(app) {
 
     return res.json({
       msg: 'welcome to challenge 5',
-      nextUrl: 'post an implementation of FizzBuzz to /challenge5 (GET /challenge5 for more details)'
+      nextUrl: 'post an implementation of FizzBuzz to /challenge5 (hit /challenge5 in your browser for more details)'
     });
   });
 };

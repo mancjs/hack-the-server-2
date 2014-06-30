@@ -196,7 +196,7 @@ describe('sandbox', function() {
     });
   });
 
-  it('the higherOrLower function gives back the correct higher, lower or equal responses', function(done) {
+  it('higherOrLower function gives back the correct higher, lower or equal response', function(done) {
     var test = {
       script: 'var main = function() { console.log(higherOrLower(1000)); console.log(higherOrLower(1)); console.log(higherOrLower(123)); return 42; };',
       input: '...',

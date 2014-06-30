@@ -135,4 +135,36 @@ describe('sandbox', function() {
       done();
     });
   });
+
+  it('captures and returns console.log calls when valid', function(done) {
+    var test = {
+      script: 'var main = function() { for (var i=0; i<10; i++) { console.log(i); } return 42; };',
+      input: '...',
+      output: 42
+    };
+
+    sandbox.run(test, teamId++, function(err, valid, logs) {
+      expect(valid).toBeTruthy();
+      expect(logs.length).toEqual(10);
+      expect(logs[0]).toEqual('0');
+      expect(logs[9]).toEqual('9');
+      done();
+    });
+  });
+
+  it('captures and returns console.log calls when invalid', function(done) {
+    var test = {
+      script: 'var main = function() { for (var i=0; i<10; i++) { console.log(i); } };',
+      input: '...',
+      output: 42
+    };
+
+    sandbox.run(test, teamId++, function(err, valid, logs) {
+      expect(valid).toBeFalsy();
+      expect(logs.length).toEqual(10);
+      expect(logs[0]).toEqual('0');
+      expect(logs[9]).toEqual('9');
+      done();
+    });
+  });
 });

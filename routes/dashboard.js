@@ -46,9 +46,15 @@ var routes = function(app) {
   });
 
   app.get('/keys', function(req, res) {
-    var team = db.getTeam(req.param('id'));
-    if (!team) return res.json({ error: 'forget your id?' });
-    return res.json({ key: team.theirKey });
+    var data = db.getTeams();
+
+    var team = _.findWhere(data.teams, { id: req.param('id') });
+    var teamYouHaveTheKeyTo = _.findWhere(data.teams, { key: team && team.theirKey });
+
+    return res.render('keys', {
+      team: team,
+      teamYouHaveTheKeyTo: teamYouHaveTheKeyTo
+    });
   });
 };
 

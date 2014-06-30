@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Final Challenge Keys</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css"></link>
+  <link rel="stylesheet" href="/css/app.css"></link>
+</head>
+<body>
+  <div class="container">
+    <h2>Final Challenge Keys</h2>
+
+    {{^team}}
+      <p>
+        Your team <code>id</code> is invalid.
+      </p>
+    {{/team}}
+
+    {{#team}}
+      {{#team.key}}
+        <p>
+          <b>{{team.teamWithKey}}</b> is the only team who know what your final key is.
+        </p>
+      {{/team.key}}
+
+      {{^team.key}}
+        <p>
+          You've not been given a final key – you won't be given one until you reach the final challenge.
+        </p>
+      {{/team.key}}
+
+      {{#team.theirKey}}
+        <p>
+          You're the only team who know the final key of <b>{{teamYouHaveTheKeyTo.name}}</b>, which is <b>{{team.theirKey}}</b>.
+        </p>
+      {{/team.theirKey}}
+
+      {{^team.theirKey}}
+        <p>
+          You have not received the final key of another team yet.
+        </p>
+      {{/team.theirKey}}
+    {{/team}}
+  </div>
+</body>
+</html>

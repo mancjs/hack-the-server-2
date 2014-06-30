@@ -197,8 +197,43 @@ describe('sandbox', function() {
   });
 
   it('higherOrLower function gives back the correct higher, lower or equal response', function(done) {
+    var test1 = {
+      script: 'var main = function() { console.log(higherOrLower(1000)); return 42; };',
+      input: '...',
+      output: 42,
+      key: 123
+    };
+
+    var test2 = {
+      script: 'var main = function() { console.log(higherOrLower(1)); return 42; };',
+      input: '...',
+      output: 42,
+      key: 123
+    };
+
+    var test3 = {
+      script: 'var main = function() { console.log(higherOrLower(123)); return 42; };',
+      input: '...',
+      output: 42,
+      key: 123
+    };
+
+    sandbox.run(test1, teamId++, function(err, valid, logs1) {
+      sandbox.run(test2, teamId++, function(err, valid, logs2) {
+        sandbox.run(test3, teamId++, function(err, valid, logs3) {
+          expect(valid).toBeTruthy();
+          expect(logs1[0]).toMatch('lower');
+          expect(logs2[0]).toMatch('higher');
+          expect(logs3[0]).toMatch('equal');
+          done();
+        })
+      });
+    });
+  });
+
+  it('higherOrLower function can only be called once', function(done) {
     var test = {
-      script: 'var main = function() { console.log(higherOrLower(1000)); console.log(higherOrLower(1)); console.log(higherOrLower(123)); return 42; };',
+      script: 'var main = function() { console.log(higherOrLower(1)); console.log(higherOrLower(1)); console.log(higherOrLower(1)); return 42; };',
       input: '...',
       output: 42,
       key: 123
@@ -206,9 +241,9 @@ describe('sandbox', function() {
 
     sandbox.run(test, teamId++, function(err, valid, logs) {
       expect(valid).toBeTruthy();
-      expect(logs[0]).toMatch('lower');
-      expect(logs[1]).toMatch('higher');
-      expect(logs[2]).toMatch('equal');
+      expect(logs[0]).toEqual('higher');
+      expect(logs[1]).toEqual('I can only be called once per script run');
+      expect(logs[2]).toEqual('I can only be called once per script run');
       done();
     });
   });

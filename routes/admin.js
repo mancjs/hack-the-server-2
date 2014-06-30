@@ -20,7 +20,7 @@ var routes = function(app) {
   });
 
   app.get('/admin/registration/enable', basicAuth, function(req, res) {
-    raiseEvent('Registration is now open :)');
+    raiseEvent('Registration is now open');
     return res.json(db.enableRegistration());
   });
 

@@ -18,7 +18,7 @@ var routes = function(app) {
       return res.json(response);
     }
 
-    events.add(response, 'Has made it to challenge 5.');
+    events.add(response, 'Has made it to challenge 5');
 
     return res.json({
       msg: 'welcome to challenge 5',

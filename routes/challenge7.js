@@ -42,7 +42,7 @@ var routes = function(app) {
         return res.json(response);
       }
 
-      events.add(response, 'Has made it to the final challenge');
+      events.add(response, 'Is now on the final challenge');
 
       return res.json({
         msg: 'you have made it to the final challenge',

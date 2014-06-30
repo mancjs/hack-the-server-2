@@ -24,7 +24,7 @@ var routes = function(app) {
 
     if (response.matchFound) {
       return res.json({
-        msg: 'just in time – both teams have progressed to challenge 7'
+        msg: 'just in time – both teams have made it to challenge 7'
       });
     } else {
       return res.json({

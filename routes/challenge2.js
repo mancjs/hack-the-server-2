@@ -9,7 +9,7 @@ var routes = function(app) {
       return res.json(response);
     }
 
-    events.add(response, 'Has completed challenge 2!');
+    events.add(response, 'Has completed challenge 2');
     return res.json({ msg: 'congratulations – just in time', nextUrl: 'hit /challenge3 in your browser' });
   });
 };

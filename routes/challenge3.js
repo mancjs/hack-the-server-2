@@ -67,7 +67,7 @@ var routes = function(app) {
         return res.json(response);
       }
 
-      events.add(response, 'Has JavaScript skills! Onwards to challenge 4!');
+      events.add(response, 'Has JavaScript skills – onwards to challenge 4');
 
       return res.json({
         msg: 'nice job, onwards to challenge 4!',

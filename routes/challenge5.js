@@ -41,7 +41,7 @@ var routes = function(app) {
         return res.json(response);
       }
 
-      events.add(response, 'Can taste victory. Welcome to challenge 6!');
+      events.add(response, 'Can taste victory – welcome to challenge 6');
 
       return res.json({
         msg: 'welcome to challenge 6!',

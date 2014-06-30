@@ -9,7 +9,7 @@ app.configure(function() {
   app.engine('html', mustachex.express);
   app.set('view engine', 'html');
   app.set('views', __dirname + '/views');
-  app.use(express.bodyParser({ uploadDir: __dirname + '/uploaded' }));
+  app.use(express.bodyParser());
   app.use(express.static(__dirname + '/public'));
   app.use(app.router);
 });

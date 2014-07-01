@@ -110,13 +110,34 @@ describe('sandbox', function() {
       output: '10'
     };
 
-    var team = 'some-team-id';
+    var team = 'some-team-id-1';
 
     sandbox.run(test, team, function(err, valid) {
       expect(valid).toBeTruthy();
 
       sandbox.run(test, team, function(err, valid) {
         expect(err).toMatch('there must be 5s between each script run');
+        expect(valid).toBeFalsy();
+        done();
+      });
+    });
+  });
+
+  it('prevents scripts being run more than once per 60s when there is a key', function(done) {
+    var test = {
+      script: 'var main = function(input) { return input; };',
+      input: '10',
+      output: '10',
+      key: 123
+    };
+
+    var team = 'some-team-id-2';
+
+    sandbox.run(test, team, function(err, valid) {
+      expect(valid).toBeTruthy();
+
+      sandbox.run(test, team, function(err, valid) {
+        expect(err).toMatch('there must be 60s between each script run');
         expect(valid).toBeFalsy();
         done();
       });

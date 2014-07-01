@@ -25,12 +25,18 @@ var getTeamData = function() {
     return team.stage;
   }).reverse();
 
-  var midPoint = Math.max(Math.ceil(teams.length / 2), 3);
-
   var response = {
-    teamsLeft: teams.slice(0, midPoint),
-    teamsRight: teams.slice(midPoint),
+    teamsLeft: [],
+    teamsRight: []
   };
+
+  _.each(teams, function(team) {
+    if (response.teamsLeft.length > response.teamsRight.length) {
+      return response.teamsRight.push(team);
+    }
+
+    response.teamsLeft.push(team);
+  });
 
   response.noTeams = !response.teamsLeft.length && !response.teamsRight.length;
   return response;

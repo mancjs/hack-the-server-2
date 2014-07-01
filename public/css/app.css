@@ -10,12 +10,12 @@ body {
 
 .container {
   margin: 20px auto;
-  width: 1100px;
+  width: 1200px;
 }
 
 .team-container {
   float: left;
-  width: 550px;
+  width: 600px;
 }
 
 h1 {
@@ -43,11 +43,11 @@ code {
 }
 
 .faded {
-  opacity: 0.3;
+  opacity: 0.4;
 }
 
 .team-name {
-  padding: 10px 0;
+  padding: 15px 0;
   font-size: 25px;
   line-height: 30px;
   letter-spacing: 2px;
@@ -55,7 +55,7 @@ code {
 }
 
 .stages {
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   padding-bottom: 10px;
   overflow: hidden;
 }
@@ -77,7 +77,7 @@ code {
   padding: 10px 17px;
   margin: 7px 0;
   text-shadow: 1px 1px #fff;
-  color: #aaa;
+  color: #bbb;
   font-size: 40px;
 }
 
@@ -85,7 +85,7 @@ code {
   float: left;
   width: 55px;
   height: 55px;
-  background: #f0f0f0;
+  background: #f7f7f7;
   margin: 0 10px 0 0;
   padding: 5px;
   border-radius: 50%;
@@ -121,11 +121,11 @@ code {
 
 .team .validation-time {
   position: absolute;
-  top: 71px;
+  top: 80px;
   left: 0px;
-  right: 0px;
+  right: 70px;
   color: #ff0000;
-  font-size: 60px;
+  font-size: 50px;
   font-weight: bold;
   text-align: center;
 }
@@ -133,7 +133,7 @@ code {
 .complete {
   font-size: 150px;
   position: absolute;
-  left: 36%;
+  left: 32.5%;
   top: 5%;
 }
 
@@ -146,7 +146,11 @@ code {
 }
 
 .complete-bronze {
-  color: #a57164;
+  color: #cd7f32;
+}
+
+.complete-white {
+  color: #eee;
 }
 
 .complete .place {
@@ -164,8 +168,8 @@ code {
 .thumbs-up {
   color: #444;
   font-size: 90px;
-  top: 26%;
-  left: 41%;
+  top: 28%;
+  left: 37.5%;
 }
 
 .sabotaged {
@@ -181,9 +185,9 @@ code {
 }
 
 .no-teams {
-  font-size: 60px;
+  font-size: 50px;
   font-weight: 400;
-  color: #aaa;
+  color: #888;
 }
 
 .hint {

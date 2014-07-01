@@ -17,7 +17,7 @@ var register = function(req, res) {
 
   verifier.send(req.body.email, response.id, function(err) {
     killTeamIn(response.id, 10 * 60);
-    events.add(response, 'A challenger appears!');
+    events.add(response, 'Welcome to the game');
 
     if (err) {
       console.log('Error: failed to send verification email to: ' + req.body.email + ' (' + response.id + ')');

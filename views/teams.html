@@ -15,15 +15,21 @@
     <span class="icon-thumbs-up complete thumbs-up"></span>
     {{/medal}}
 
-    {{#sabotaged}}
-    <span class="icon-frown complete sabotaged"></span>
-    {{/sabotaged}}
-
     <div class="{{#trophy}}faded{{/trophy}} {{#medal}}faded{{/medal}} {{#sabotaged}}faded{{/sabotaged}}">
       <div class="team-name {{#sabotaged}}sabotaged-name{{/sabotaged}}">
         {{#saboteur}}
-          <span class="icon-bolt saboteur-icon" alt="Saboteur" title="Saboteur"></span>
+          {{#saboteurUsed}}
+            <span class="icon-bolt saboteur-icon-used" alt="This team was the saboteur" title="This team was the saboteur"></span>
+          {{/saboteurUsed}}
+
+          {{^saboteurUsed}}
+            <span class="icon-bolt saboteur-icon-unused" alt="This team is the saboteur" title="This team is the saboteur"></span>
+          {{/saboteurUsed}}
         {{/saboteur}}
+
+        {{#sabotaged}}
+          <span class="icon-frown sabotaged" alt="This team is currently sabotaged" title="This team is currently sabotaged"></span>
+        {{/sabotaged}}
 
         {{name}}
       </div>
@@ -70,15 +76,21 @@
     </span>
     {{/trophy}}
 
-    {{#sabotaged}}
-    <span class="icon-frown complete sabotaged"></span>
-    {{/sabotaged}}
-
     <div class="{{#trophy}}faded{{/trophy}} {{#medal}}faded{{/medal}} {{#sabotaged}}faded{{/sabotaged}}">
       <div class="team-name {{#sabotaged}}sabotaged-name{{/sabotaged}}">
         {{#saboteur}}
-          <span class="icon-bolt saboteur-icon" alt="Saboteur" title="Saboteur"></span>
+          {{#saboteurUsed}}
+            <span class="icon-bolt saboteur-icon-used" alt="This team was the saboteur" title="This team was the saboteur"></span>
+          {{/saboteurUsed}}
+
+          {{^saboteurUsed}}
+            <span class="icon-bolt saboteur-icon-unused" alt="This team is the saboteur" title="This team was is saboteur"></span>
+          {{/saboteurUsed}}
         {{/saboteur}}
+
+        {{#sabotaged}}
+          <span class="icon-frown sabotaged" alt="This team is currently sabotaged" title="This team is currently sabotaged"></span>
+        {{/sabotaged}}
 
         {{name}}
       </div>

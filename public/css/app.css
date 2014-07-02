@@ -139,18 +139,22 @@ code {
 
 .complete-gold {
   color: gold;
+  z-index: 100;
 }
 
 .complete-silver {
   color: silver;
+  z-index: 100;
 }
 
 .complete-bronze {
   color: #cd7f32;
+  z-index: 100;
 }
 
 .complete-white {
   color: #eee;
+  z-index: 100;
 }
 
 .complete .place {
@@ -165,16 +169,16 @@ code {
   font-family: Helvetica;
 }
 
-.saboteur-icon {
-  color: gold;
+.saboteur-icon-unused {
+  color: #ff3333;
+}
+
+.saboteur-icon-used {
+  color: #ccc;
 }
 
 .sabotaged {
-  color: #444;
-  font-size: 90px;
-  top: 34%;
-  left: 37.5%;
-  color: #ff1111;
+  color: #ff0000;
 }
 
 .sabotaged-name {

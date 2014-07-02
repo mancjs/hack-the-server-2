@@ -3,6 +3,10 @@ var events = require('../lib/events');
 
 var routes = function(app) {
   app.post('/val1date/:teamId', function(req, res) {
+    if (db.teamIsSabotaged(req.param('teamId'))) {
+      return res.json({ error: 'you have been sabotaged – you are blocked for 10 minutes' });
+    }
+
     var response = db.completeChallenge2(req.param('teamId'));
 
     if (response.error) {

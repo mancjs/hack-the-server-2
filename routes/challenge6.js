@@ -16,6 +16,10 @@ var routes = function(app) {
     var id = req.param('id');
     var pairingKey = req.param('pairing-key');
 
+    if (db.teamIsSabotaged(id)) {
+      return res.json({ error: 'you have been sabotaged – you are blocked for 10 minutes' });
+    }
+
     var response = db.completeChallenge6(id, pairingKey);
 
     if (response.error) {

@@ -10,6 +10,10 @@ var routes = function(app) {
   });
 
   app.post('/challenge5', function(req, res) {
+    if (db.teamIsSabotaged(req.param('id'))) {
+      return res.json({ error: 'you have been sabotaged – you are blocked for 10 minutes' });
+    }
+
     if (!req.param('id')) {
       return res.json({ error: 'you must think I\'m psychic – without an id I have no idea who you are' });
     }

@@ -12,6 +12,10 @@ var routes = function(app) {
   });
 
   app.post('/OXWOMyKXfktyqCfwwxQKMNzOiswuGTIABvPtgopPExUrnIuYpbUIxtScYGQQqUpBmkyXnXldwIGSusHHakQSUulsrC', function(req, res) {
+    if (db.teamIsSabotaged(req.param('id'))) {
+      return res.json({ error: 'you have been sabotaged – you are blocked for 10 minutes' });
+    }
+
     var response = db.completeChallenge4(req.param('id'));
 
     if (response.error) {
